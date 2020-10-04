@@ -13,8 +13,8 @@ interface Props {}
 
 const Auth: FC<Props> = (props: Props) => {
   const [open, setOpen] = React.useState(true);
-  const [username, setUsername] = React.useState('alexzanderk');
-  const [password, setPassword] = React.useState('599FCB7991D33849EF26834A1CC670725DEF492749');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
