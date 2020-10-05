@@ -13,13 +13,22 @@ export interface LoginSuccessAction {
   payload: LoginResponse;
   isLoading: false;
   error: null;
+  credentials: {
+    username: string;
+    pass: string;
+  };
 }
 
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export interface LoginFailAction {
   type: typeof LOGIN_FAIL;
   isLoading: false;
-  error: string[];
+  error: string;
 }
 
-export type AuthActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailAction;
+export const LOGOUT = 'LOGOUT';
+export interface LogoutAction {
+  type: typeof LOGOUT;
+}
+
+export type AuthActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailAction | LogoutAction;

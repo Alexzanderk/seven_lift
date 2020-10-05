@@ -2,7 +2,7 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { AppState } from '../../core/root.reducer';
 import { api } from '../../api/api';
-import { LOGIN_SUCCESS, AuthActionTypes, LOGIN_FAIL, LOGIN_REQUEST } from './auth.types';
+import { LOGIN_SUCCESS, AuthActionTypes, LOGIN_FAIL, LOGIN_REQUEST, LogoutAction, LOGOUT } from './auth.types';
 import { getHash } from '../../core/core.tools';
 
 export const login = (username: string, pass: string): ThunkAction<void, AppState, unknown, Action<string>> => {
@@ -18,6 +18,10 @@ export const login = (username: string, pass: string): ThunkAction<void, AppStat
         error: null,
         isLoading: false,
         payload: response.data,
+        credentials: {
+          username,
+          pass,
+        },
       });
     } catch (error) {
       dispatch({
@@ -28,3 +32,7 @@ export const login = (username: string, pass: string): ThunkAction<void, AppStat
     }
   };
 };
+
+export const logout = (): LogoutAction => ({
+  type: LOGOUT,
+});

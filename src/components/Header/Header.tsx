@@ -3,13 +3,13 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Auth from '../Auth/Auth';
+import { Options } from '../Options/Options';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      background: `rgba(0,0,0, .75)`,
       flexGrow: 1,
     },
     menuButton: {
@@ -25,19 +25,15 @@ const Header: FC = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Lift Control
-          </Typography>
-          <Auth />
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar classes={{ root: classes.root }} position="static">
+      <Toolbar>
+        <Options />
+        <Typography variant="h6" className={classes.title}>
+          Lift Control
+        </Typography>
+        <Auth />
+      </Toolbar>
+    </AppBar>
   );
 };
 

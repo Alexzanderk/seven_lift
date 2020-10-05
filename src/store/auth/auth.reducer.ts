@@ -1,11 +1,21 @@
-import { AuthActionTypes, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL } from './auth.types';
+import { AuthActionTypes, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './auth.types';
 
 export interface AuthState {
   token: string;
+  errors: string[];
+  credentials: {
+    username: string;
+    pass: string;
+  };
 }
 
 const initialState: AuthState = {
   token: '',
+  errors: [],
+  credentials: {
+    username: '',
+    pass: '',
+  },
 };
 
 export const authReducer = (state = initialState, action: AuthActionTypes): AuthState => {
@@ -18,12 +28,27 @@ export const authReducer = (state = initialState, action: AuthActionTypes): Auth
     case LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.payload.UserSID
+        token: action.payload.UserSID,
+        credentials: {
+          username: action.credentials.username,
+          pass: action.credentials.pass,
+        },
       };
 
     case LOGIN_FAIL:
       return {
         ...state,
+        errors: [action.error],
+      };
+
+    case LOGOUT:
+      return {
+        ...state,
+        token: '',
+        credentials: {
+          pass: '',
+          username: '',
+        },
       };
 
     default:

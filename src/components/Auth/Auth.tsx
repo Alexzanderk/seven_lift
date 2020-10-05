@@ -6,16 +6,19 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/auth/auth.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '../../store/auth/auth.action';
+import { AppState } from '../../core/root.reducer';
+import { AuthState } from '../../store/auth/auth.reducer';
 
 interface Props {}
 
 const Auth: FC<Props> = (props: Props) => {
-  const [open, setOpen] = React.useState(true);
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+  const [username, setUsername] = React.useState('alexzanderk');
+  const [password, setPassword] = React.useState('aC8LvxCChjaai');
   const dispatch = useDispatch();
+  const { token } = useSelector<AppState, AuthState>((state) => state.auth);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
@@ -35,9 +38,15 @@ const Auth: FC<Props> = (props: Props) => {
 
   return (
     <div>
-      <Button color="inherit" onClick={handleClickOpen}>
-        Login
-      </Button>
+      {!token ? (
+        <Button color="inherit" onClick={handleClickOpen}>
+          Login
+        </Button>
+      ) : (
+        <Button color="inherit" onClick={() => dispatch(logout())}>
+          Logout
+        </Button>
+      )}
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Login</DialogTitle>
         <DialogContent>

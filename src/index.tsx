@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import { store } from './core/store';
 
 const GlobalStyle = createGlobalStyle`
-  body {font-family: 'Roboto';  background: #ccc; min-height: 100vh;}
+  body {font-family: 'Roboto';}
 `;
 const theme = createMuiTheme({
   // overrides: {
@@ -24,6 +24,7 @@ const theme = createMuiTheme({
     // useNextVariants: true
   },
   palette: {
+    type: 'dark',
     primary: {
       light: blue[300],
       main: blue[500],
@@ -34,7 +35,6 @@ const theme = createMuiTheme({
       main: indigo[900],
       dark: indigo[900],
     },
-    // type: 'dark'
   },
 });
 
