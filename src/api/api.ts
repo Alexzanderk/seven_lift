@@ -1,10 +1,12 @@
 import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { axiosConfig } from './config';
-import { LoginResponse, GetDoorsListResponse } from './api.types';
+import { LoginResponse, GetDoorsListResponse, OpenCloseDoorResponse, OpenCloseDoorRequestBody } from './api.types';
 
 interface IApi {
   login(login: string, pass: string): Promise<AxiosResponse<any>>;
   getDoors(token: string): Promise<AxiosResponse<any>>;
+  openDoor(data: OpenCloseDoorRequestBody): Promise<AxiosResponse<OpenCloseDoorResponse>>;
+  closeDoor(data: OpenCloseDoorRequestBody): Promise<AxiosResponse<OpenCloseDoorResponse>>;
 }
 
 export interface IAxiosConfig {
@@ -19,6 +21,14 @@ class Api implements IApi {
       baseURL: config.url,
     });
   }
+  async openDoor(data: OpenCloseDoorRequestBody): Promise<AxiosResponse<OpenCloseDoorResponse>> {
+    return await this.api.post('/DoorUnlockList', data);
+  }
+
+  async closeDoor(data: OpenCloseDoorRequestBody): Promise<AxiosResponse<OpenCloseDoorResponse>> {
+    return await this.api.post('/DoorLockList', data);
+  }
+
   async getDoors(token: string): Promise<AxiosResponse<GetDoorsListResponse>> {
     return await this.api.post('/DoorGetList', {
       Language: 'ua',

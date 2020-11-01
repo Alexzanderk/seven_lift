@@ -13,6 +13,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AppState } from '../../core/root.reducer';
 import { LiftActionTypes } from '../lift/lift.types';
 import { api } from '../../api/api';
+import { OpenCloseDoorRequestBody } from '../../api/api.types';
 
 export const getLiftPanelFromApi = (token: string) => {
   return async (dispatch: ThunkDispatch<AppState, any, LiftActionTypes>): Promise<void> => {
@@ -26,6 +27,42 @@ export const getLiftPanelFromApi = (token: string) => {
       dispatch({ type: GET_ALL_DOORS_SUCCESS, payload: { Door } });
     } catch (error) {
       dispatch({ type: GET_ALL_DOORS_FAIL, payload: error });
+    }
+  };
+};
+
+export const openDoor = (data: OpenCloseDoorRequestBody) => {
+  return async (dispatch: ThunkDispatch<AppState, any, LiftActionTypes>): Promise<void> => {
+    try {
+      dispatch({ type: DOOR_OPEN_REQUEST });
+      const response = await api.openDoor(data);
+      console.log({ open: response });
+
+      dispatch({
+        type: DOOR_OPEN_SUCCESS,
+        payload: { token: data.Tokens[0] },
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: DOOR_OPEN_FAIL });
+    }
+  };
+};
+
+export const closeDoor = (data: OpenCloseDoorRequestBody) => {
+  return async (dispatch: ThunkDispatch<AppState, any, LiftActionTypes>): Promise<void> => {
+    try {
+      dispatch({ type: DOOR_CLOSE_REQUEST });
+      const response = await api.closeDoor(data);
+      console.log({ open: response });
+
+      dispatch({
+        type: DOOR_CLOSE_SUCCESS,
+        payload: { token: data.Tokens[0] },
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: DOOR_CLOSE_FAIL });
     }
   };
 };

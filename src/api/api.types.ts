@@ -42,3 +42,13 @@ export interface Door {
 export interface GetDoorsListResponse {
   Door: Door[];
 }
+
+export interface OpenCloseDoorResponse {
+  Language: any;
+  UserSID: string;
+}
+
+export interface OpenCloseDoorRequestBody {
+  UserSID: string;
+  Tokens: [number];
+}

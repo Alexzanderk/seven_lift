@@ -38,4 +38,14 @@ export const getSectionsPanel = (arr: Door[]) => {
     B1,
     B2,
   };
-}
+};
+
+export const changeFloorStatus = (token: number) => {
+  return (element: Floor) => {
+    if (element.token === token) {
+      element.open = !element.open;
+    }
+
+    return element;
+  };
+};

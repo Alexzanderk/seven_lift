@@ -49,7 +49,13 @@ const LiftPanel: FC<Props> = (props: Props) => {
   return (
     <Paper className={classes.root} elevation={2}>
       {props.floors.map((element) => (
-        <LiftButton key={element.floor + element.house} open={element.open} floar={element.floor} />
+        <LiftButton
+          key={element.floor + element.house}
+          section={element.section}
+          token={element.token}
+          open={element.open}
+          floar={element.floor}
+        />
       ))}
       <Typography className={classes.label}>{props.section}</Typography>
     </Paper>

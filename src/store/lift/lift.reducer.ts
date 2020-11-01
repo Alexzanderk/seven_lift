@@ -11,14 +11,14 @@ import {
   GET_ALL_DOORS_REQUEST,
 } from './lift.types';
 import { Door } from '../../api/api.types';
-import { getSectionsPanel } from '../../utils/list.util';
+import { getSectionsPanel, changeFloorStatus } from '../../utils/list.util';
 
 export interface Floor {
   floor: string;
   open: boolean;
   section: string;
-  house?: string;
-  token?: number;
+  house: string;
+  token: number;
 }
 
 export type LiftState = {
@@ -37,6 +37,8 @@ const generateFloors = (floorNum: number, section: 'A' | 'B'): Floor[] => {
       floor: `${index + 1}`,
       open: false,
       section,
+      house: '',
+      token: 0,
     };
     floors.push(floor);
   }
@@ -60,14 +62,16 @@ export const liftReducer = (state = initialState, action: LiftActionTypes) => {
       return { ...state, isLoading: true };
 
     case DOOR_OPEN_SUCCESS:
-      return { ...state, isLoading: false };
+    case DOOR_CLOSE_SUCCESS:
+      const changeStatus = changeFloorStatus(action.payload.token);
+      return {
+        ...state,
+        isLoading: false,
+        floorsA: state.floorsA.map(changeStatus),
+        floorsB: state.floorsB.map(changeStatus),
+      };
 
     case DOOR_OPEN_FAIL:
-      return { ...state, isLoading: false };
-
-    case DOOR_CLOSE_SUCCESS:
-      return { ...state, isLoading: false };
-
     case DOOR_CLOSE_FAIL:
       return { ...state, isLoading: false };
 

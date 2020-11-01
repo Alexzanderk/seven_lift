@@ -8,6 +8,7 @@ export interface DoorOpenRequestAction {
 export const DOOR_OPEN_SUCCESS = 'DOOR_OPEN_SUCCESS';
 export interface DoorOpenSuccess {
   type: typeof DOOR_OPEN_SUCCESS;
+  payload: { token: number };
 }
 
 export const DOOR_OPEN_FAIL = 'DOOR_OPEN_FAIL';
@@ -23,6 +24,7 @@ export interface DoorCloseRequestAction {
 export const DOOR_CLOSE_SUCCESS = 'DOOR_CLOSE_SUCCESS';
 export interface DoorCloseSuccessAction {
   type: typeof DOOR_CLOSE_SUCCESS;
+  payload: { token: number };
 }
 
 export const DOOR_CLOSE_FAIL = 'DOOR_CLOSE_FAIL';
