@@ -14,6 +14,7 @@ import { AppState } from '../../core/root.reducer';
 import { LiftActionTypes } from '../lift/lift.types';
 import { api } from '../../api/api';
 import { OpenCloseDoorRequestBody } from '../../api/api.types';
+import { LOGIN_REQUEST, AuthActionTypes, LOGIN_SUCCESS, LOGIN_FAIL } from '../auth/auth.types';
 
 export const getLiftPanelFromApi = (token: string) => {
   return async (dispatch: ThunkDispatch<AppState, any, LiftActionTypes>): Promise<void> => {
@@ -32,7 +33,10 @@ export const getLiftPanelFromApi = (token: string) => {
 };
 
 export const openDoor = (data: OpenCloseDoorRequestBody) => {
-  return async (dispatch: ThunkDispatch<AppState, any, LiftActionTypes>): Promise<void> => {
+  return async (
+    dispatch: ThunkDispatch<AppState, any, LiftActionTypes | AuthActionTypes>,
+    getState: () => AppState,
+  ): Promise<void> => {
     try {
       dispatch({ type: DOOR_OPEN_REQUEST });
       const response = await api.openDoor(data);
@@ -44,13 +48,34 @@ export const openDoor = (data: OpenCloseDoorRequestBody) => {
       });
     } catch (error) {
       console.log(error);
-      dispatch({ type: DOOR_OPEN_FAIL });
+      dispatch({ type: DOOR_OPEN_FAIL, payload: error.message });
+
+      try {
+        dispatch({ type: LOGIN_REQUEST, error: null, isLoading: true });
+        const state = getState();
+        const loginResponse = await api.login(state.auth.credentials.username, state.auth.credentials.pass);
+        dispatch({
+          type: LOGIN_SUCCESS,
+          error: null,
+          isLoading: false,
+          payload: loginResponse.data,
+          credentials: {
+            username: state.auth.credentials.username,
+            pass: state.auth.credentials.pass,
+          },
+        });
+      } catch (error) {
+        dispatch({ type: LOGIN_FAIL, isLoading: false, error: error.message });
+      }
     }
   };
 };
 
 export const closeDoor = (data: OpenCloseDoorRequestBody) => {
-  return async (dispatch: ThunkDispatch<AppState, any, LiftActionTypes>): Promise<void> => {
+  return async (
+    dispatch: ThunkDispatch<AppState, any, LiftActionTypes | AuthActionTypes>,
+    getState: () => AppState,
+  ): Promise<void> => {
     try {
       dispatch({ type: DOOR_CLOSE_REQUEST });
       const response = await api.closeDoor(data);
@@ -62,7 +87,25 @@ export const closeDoor = (data: OpenCloseDoorRequestBody) => {
       });
     } catch (error) {
       console.log(error);
-      dispatch({ type: DOOR_CLOSE_FAIL });
+      dispatch({ type: DOOR_CLOSE_FAIL, payload: error.message });
+
+      try {
+        dispatch({ type: LOGIN_REQUEST, error: null, isLoading: true });
+        const state = getState();
+        const loginResponse = await api.login(state.auth.credentials.username, state.auth.credentials.pass);
+        dispatch({
+          type: LOGIN_SUCCESS,
+          error: null,
+          isLoading: false,
+          payload: loginResponse.data,
+          credentials: {
+            username: state.auth.credentials.username,
+            pass: state.auth.credentials.pass,
+          },
+        });
+      } catch (error) {
+        dispatch({ type: LOGIN_FAIL, isLoading: false, error: error.message });
+      }
     }
   };
 };
