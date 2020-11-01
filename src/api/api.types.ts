@@ -37,6 +37,7 @@ export interface LoginResponse {
 export interface Door {
   Token: number;
   Name: string;
+  HardwareState: number;
 }
 export interface GetDoorsListResponse {
   Door: Door[];

@@ -10,7 +10,7 @@ export const getSectionsPanel = (arr: Door[]) => {
     floorsArr.forEach((floorNum) => {
       const floor: Floor = <Floor>{
         floor: floorNum,
-        open: false,
+        open: cur.HardwareState === 512,
         section: arrHouseAndLiftSection[1],
         house: arrHouseAndLiftSection[0],
         token: cur.Token,
