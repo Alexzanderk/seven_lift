@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  floar: number;
+  floar: string;
   open: boolean;
 }
 

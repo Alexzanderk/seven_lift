@@ -1,9 +1,10 @@
 import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { axiosConfig } from './config';
-import { LoginResponse } from './api.types';
+import { LoginResponse, GetDoorsListResponse } from './api.types';
 
 interface IApi {
-  login(login: string, pass: string): Promise<any>;
+  login(login: string, pass: string): Promise<AxiosResponse<any>>;
+  getDoors(token: string): Promise<AxiosResponse<any>>;
 }
 
 export interface IAxiosConfig {
@@ -16,6 +17,15 @@ class Api implements IApi {
   constructor(config: IAxiosConfig) {
     this.api = Axios.create({
       baseURL: config.url,
+    });
+  }
+  async getDoors(token: string): Promise<AxiosResponse<GetDoorsListResponse>> {
+    return await this.api.post('/DoorGetList', {
+      Language: 'ua',
+      Limit: 0,
+      StartToken: 0,
+      SubscriptionEnabled: true,
+      UserSID: token,
     });
   }
 

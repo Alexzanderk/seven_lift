@@ -33,6 +33,7 @@ const Auth: FC<Props> = (props: Props) => {
   const handleClose = () => setOpen(false);
   const handleSubmit = () => {
     dispatch(login(username, password));
+
     handleClose();
   };
 

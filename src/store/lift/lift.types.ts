@@ -1,3 +1,5 @@
+import { GetDoorsListResponse } from '../../api/api.types';
+
 export const DOOR_OPEN_REQUEST = 'DOOR_OPEN_REQUEST';
 export interface DoorOpenRequestAction {
   type: typeof DOOR_OPEN_REQUEST;
@@ -28,10 +30,28 @@ export interface DoorCloseFailAction {
   type: typeof DOOR_CLOSE_FAIL;
 }
 
+export const GET_ALL_DOORS_SUCCESS = 'GET_ALL_DOORS_SUCCESS';
+export interface GetAllDoorsSuccessAction {
+  type: typeof GET_ALL_DOORS_SUCCESS;
+  payload: GetDoorsListResponse;
+}
+export const GET_ALL_DOORS_FAIL = 'GET_ALL_DOORS_FAIL';
+export interface GetAllDoorsFailAction {
+  type: typeof GET_ALL_DOORS_FAIL;
+  payload: Error;
+}
+export const GET_ALL_DOORS_REQUEST = 'GET_ALL_DOORS_REQUEST';
+export interface GetAllDoorsReqestAction {
+  type: typeof GET_ALL_DOORS_REQUEST;
+}
+
 export type LiftActionTypes =
   | DoorOpenRequestAction
   | DoorOpenSuccess
   | DoorOpenFail
   | DoorCloseRequestAction
   | DoorCloseSuccessAction
-  | DoorCloseFailAction;
+  | DoorCloseFailAction
+  | GetAllDoorsSuccessAction
+  | GetAllDoorsFailAction
+  | GetAllDoorsReqestAction;

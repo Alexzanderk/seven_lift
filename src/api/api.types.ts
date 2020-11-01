@@ -33,3 +33,11 @@ export interface LoginResponse {
     VisitorsReports: boolean;
   };
 }
+
+export interface Door {
+  Token: number;
+  Name: string;
+}
+export interface GetDoorsListResponse {
+  Door: Door[];
+}

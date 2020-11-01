@@ -1,7 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Paper, makeStyles, createStyles, Theme, Typography } from '@material-ui/core';
 import { LiftButton } from './LiftButton';
 import { LiftState, Floor } from '../../store/lift/lift.reducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from '../../core/root.reducer';
+import { AuthState } from '../../store/auth/auth.reducer';
+import { getLiftPanelFromApi } from '../../store/lift/lift.action';
 // import { AppState } from '../../core/root.reducer';
 // import { useSelector } from 'react-redux';
 
@@ -32,10 +36,20 @@ interface Props {
 
 const LiftPanel: FC<Props> = (props: Props) => {
   const classes = useStyles();
+  const { token } = useSelector<AppState, AuthState>((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      console.log({ token });
+      dispatch(getLiftPanelFromApi(token));
+    }
+  }, [token, getLiftPanelFromApi]);
+
   return (
     <Paper className={classes.root} elevation={2}>
       {props.floors.map((element) => (
-        <LiftButton key={element.floor} open={element.open} floar={element.floor} />
+        <LiftButton key={element.floor + element.house} open={element.open} floar={element.floor} />
       ))}
       <Typography className={classes.label}>{props.section}</Typography>
     </Paper>
