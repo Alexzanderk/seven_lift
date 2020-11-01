@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { IconButton, Dialog, DialogTitle, DialogContent, DialogContentText, FormControlLabel, Switch } from '@material-ui/core';
+import { IconButton, Dialog, DialogTitle, DialogContent, FormControlLabel, Switch } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,13 +1,11 @@
 import React, { FC, useEffect } from 'react';
 import { Paper, makeStyles, createStyles, Theme, Typography } from '@material-ui/core';
 import { LiftButton } from './LiftButton';
-import { LiftState, Floor } from '../../store/lift/lift.reducer';
+import { Floor } from '../../store/lift/lift.reducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../core/root.reducer';
 import { AuthState } from '../../store/auth/auth.reducer';
 import { getLiftPanelFromApi } from '../../store/lift/lift.action';
-// import { AppState } from '../../core/root.reducer';
-// import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +42,7 @@ const LiftPanel: FC<Props> = (props: Props) => {
       console.log({ token });
       dispatch(getLiftPanelFromApi(token));
     }
-  }, [token, getLiftPanelFromApi]);
+  }, [token, dispatch]);
 
   return (
     <Paper className={classes.root} elevation={2}>

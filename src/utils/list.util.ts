@@ -8,7 +8,7 @@ export const getSectionsPanel = (arr: Door[]) => {
     const floorsArr = splitedName[1].split('.');
 
     floorsArr.forEach((floorNum) => {
-      const floor: Floor = <Floor>{
+      const floor: Floor = {
         floor: floorNum,
         open: cur.HardwareState === 512,
         section: arrHouseAndLiftSection[1],
