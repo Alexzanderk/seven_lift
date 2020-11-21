@@ -38,11 +38,11 @@ export const Options: FC = () => {
         <Settings />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Settings</DialogTitle>
+        <DialogTitle id="form-dialog-title">Налаштування</DialogTitle>
         <DialogContent>
           <FormControlLabel
             control={<Switch checked={reverse} onChange={() => dispatch(toggleRevert())} name="checkedB" color="primary" />}
-            label="Reverse lift panels"
+            label="Розвернути панель кнопок"
           />
         </DialogContent>
       </Dialog>

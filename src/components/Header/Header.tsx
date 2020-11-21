@@ -29,7 +29,7 @@ const Header: FC = () => {
       <Toolbar>
         <Options />
         <Typography variant="h6" className={classes.title}>
-          Lift Control
+          Керування ліфтами
         </Typography>
         <Auth />
       </Toolbar>
