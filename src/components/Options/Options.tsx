@@ -42,7 +42,7 @@ export const Options: FC = () => {
         <DialogContent>
           <FormControlLabel
             control={<Switch checked={reverse} onChange={() => dispatch(toggleRevert())} name="checkedB" color="primary" />}
-            label="Розвернути панель кнопок"
+            label="Поміняти місяціми секції"
           />
         </DialogContent>
       </Dialog>

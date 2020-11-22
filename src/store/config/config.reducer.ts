@@ -6,13 +6,14 @@ export interface ConfigState {
 }
 
 const initialState: ConfigState = {
-  reverse: false,
+  reverse: !!localStorage.getItem('reversePanels') || false,
   darkMode: true,
 };
 
 export const configReducer = (state = initialState, action: ConfigActionsTypes): ConfigState => {
   switch (action.type) {
     case TOGGLE_REVERT:
+      localStorage.setItem('reversePanels', !state.reverse === true ? '1' : '');
       return {
         ...state,
         reverse: !state.reverse,
