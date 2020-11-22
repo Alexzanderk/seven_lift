@@ -8,6 +8,7 @@ import { LiftState } from './store/lift/lift.reducer';
 import { AppState } from './core/root.reducer';
 import { useSelector } from 'react-redux';
 import { ConfigState } from './store/config/config.reducer';
+import { AuthState } from './store/auth/auth.reducer';
 
 interface Props {}
 
@@ -25,13 +26,18 @@ export const App: FC<Props> = (props: Props) => {
   const classes = useStyle();
   const { floorsA, floorsB } = useSelector<AppState, LiftState>((state) => state.lift);
   const { reverse } = useSelector<AppState, ConfigState>((state) => state.config);
+  const { token } = useSelector<AppState, AuthState>((state) => state.auth);
 
   return (
     <div className={classes.bg}>
       <Header />
       <Grid container justify="space-around" direction={reverse ? 'row-reverse' : 'row'}>
-        <LiftPanel floors={floorsA} section="A" />
-        <LiftPanel floors={floorsB} section="B" />
+        {token ? (
+          <>
+            <LiftPanel floors={floorsA} section="A" />
+            <LiftPanel floors={floorsB} section="B" />
+          </>
+        ) : ''}
       </Grid>
     </div>
   );
