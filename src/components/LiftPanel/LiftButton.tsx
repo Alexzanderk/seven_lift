@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       '& > *': {
-        margin: theme.spacing(1),
+        margin: theme.spacing(0.5),
       },
     },
     open: {
@@ -69,8 +69,8 @@ export const LiftButton: FC<Props> = (props: Props) => {
   };
   return (
     <div className={classes.root}>
-      <Fab onClick={handleClick} className={props.open ? classes.open : classes.close} size="large">
-        <Typography variant="h4" align="center">
+      <Fab onClick={handleClick} className={props.open ? classes.open : classes.close} size="medium">
+        <Typography variant="h5" align="center">
           {props.floar}
         </Typography>
       </Fab>

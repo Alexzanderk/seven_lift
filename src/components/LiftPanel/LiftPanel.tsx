@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       background: `rgba(0,0,0, .75)`,
-      maxWidth: '400px',
+      maxWidth: '350px',
       display: 'grid',
       flexGrow: 1,
       gridTemplateColumns: `repeat(3, 1fr)`,
