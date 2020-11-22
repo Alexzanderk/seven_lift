@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyItems: 'center',
       gridGap: '5px',
       alignItems: 'center',
-      direction: 'initial',
+      direction: 'rtl',
       gridAutoFlow: 'dense',
     },
     label: {
@@ -36,6 +36,7 @@ const LiftPanel: FC<Props> = (props: Props) => {
   const classes = useStyles();
   const { token } = useSelector<AppState, AuthState>((state) => state.auth);
   const dispatch = useDispatch();
+  const floors = props.floors.slice().reverse();
 
   useEffect(() => {
     if (token) {
@@ -44,9 +45,10 @@ const LiftPanel: FC<Props> = (props: Props) => {
     }
   }, [token, dispatch]);
 
+
   return (
     <Paper className={classes.root} elevation={2}>
-      {props.floors.map((element) => (
+      {floors.map((element) => (
         <LiftButton
           key={element.floor + element.house}
           section={element.section}
