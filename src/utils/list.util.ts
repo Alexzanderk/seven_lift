@@ -5,7 +5,8 @@ export const getSectionsPanel = (arr: Door[]) => {
   const floorsWithTokenArr = arr.reduce<Array<Floor>>((acc: Array<Floor>, cur: Door) => {
     const splitedName = cur.Name.split(' '); //?
     const arrHouseAndLiftSection = splitedName[0].split('-');
-    const floorsArr = splitedName[1].split('.');
+    const [floors, suffix] = splitedName[1].split('/');
+    const floorsArr = floors.split('.');
 
     floorsArr.forEach((floorNum) => {
       const floor: Floor = {
