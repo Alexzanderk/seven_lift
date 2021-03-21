@@ -1,7 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { makeStyles, Grid } from '@material-ui/core';
-import bg from './img/7night.jpg';
-import bg2 from './img/lift.jpg';
 import Header from './components/Header/Header';
 import { LiftState } from './store/lift/lift.reducer';
 import { AppState } from './core/root.reducer';
@@ -13,20 +11,23 @@ import { getLiftPanelFromApi } from './store/lift/lift.action';
 
 interface Props {}
 
-const useStyle = makeStyles((theme) => ({
-  bg: {
-    minHeight: '100vh',
-    background: `url(${bg2})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-  },
-}));
+const useStyle = (background: string = 'bg2') => {
+  return makeStyles((theme) => ({
+    background: {
+      minHeight: '100vh',
+      background: `url(${require(`./img/${background}.jpg`)})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+    },
+  }));
+}
 
 export const App: FC<Props> = (props: Props) => {
-  const classes = useStyle();
   const dispatch = useDispatch();
   const { A1, A2, A3, B1, B2 } = useSelector<AppState, LiftState>((state) => state.lift);
+  const { bg } = useSelector<AppState, ConfigState>((state) => state.config);
+  const classes = useStyle(bg)();
   const { reverse } = useSelector<AppState, ConfigState>((state) => state.config);
   const { token } = useSelector<AppState, AuthState>((state) => state.auth);
 
@@ -38,7 +39,7 @@ export const App: FC<Props> = (props: Props) => {
   }, [token, dispatch]);
 
   return (
-    <div className={classes.bg}>
+    <div className={classes.background}>
       <Header />
       <Grid container justify="space-around" direction={reverse ? 'row-reverse' : 'row'}>
         {token ? (
