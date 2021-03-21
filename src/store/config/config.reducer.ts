@@ -1,13 +1,15 @@
-import { ConfigActionsTypes, TOGGLE_REVERT, TOGGLE_DARK_MODE } from './config.type';
+import { ConfigActionsTypes, TOGGLE_REVERT, TOGGLE_DARK_MODE, SET_BACKGROUND } from './config.type';
 
 export interface ConfigState {
   reverse: boolean;
   darkMode: boolean;
+  bg: string;
 }
 
 const initialState: ConfigState = {
   reverse: !!localStorage.getItem('reversePanels') || false,
   darkMode: true,
+  bg: 'bg',
 };
 
 export const configReducer = (state = initialState, action: ConfigActionsTypes): ConfigState => {
@@ -23,6 +25,12 @@ export const configReducer = (state = initialState, action: ConfigActionsTypes):
       return {
         ...state,
         darkMode: !state.darkMode,
+      };
+
+    case SET_BACKGROUND:
+      return {
+        ...state,
+        bg: action.payload.bg,
       };
 
     default:

@@ -27,6 +27,11 @@ export type LiftState = {
   errors: string[];
   isLoading: boolean;
   doors: Door[];
+  A1: Floor[];
+  A2: Floor[];
+  A3: Floor[];
+  B1: Floor[];
+  B2: Floor[];
 };
 
 const generateFloors = (floorNum: number, section: 'A' | 'B'): Floor[] => {
@@ -52,6 +57,11 @@ const initialState: LiftState = {
   errors: [],
   isLoading: false,
   doors: [],
+  A1: [],
+  A2: [],
+  A3: [],
+  B1: [],
+  B2: [],
 };
 
 export const liftReducer = (state = initialState, action: LiftActionTypes) => {
@@ -64,11 +74,15 @@ export const liftReducer = (state = initialState, action: LiftActionTypes) => {
     case DOOR_OPEN_SUCCESS:
     case DOOR_CLOSE_SUCCESS:
       const changeStatus = changeFloorStatus(action.payload.token);
+
       return {
         ...state,
         isLoading: false,
-        floorsA: state.floorsA.map(changeStatus),
-        floorsB: state.floorsB.map(changeStatus),
+        A1: state.A1.map(changeStatus),
+        A2: state.A2.map(changeStatus),
+        A3: state.A3.map(changeStatus),
+        B1: state.B1.map(changeStatus),
+        B2: state.B2.map(changeStatus),
       };
 
     case DOOR_OPEN_FAIL:
@@ -76,13 +90,18 @@ export const liftReducer = (state = initialState, action: LiftActionTypes) => {
       return { ...state, isLoading: false };
 
     case GET_ALL_DOORS_SUCCESS:
-      const { A1, B1 } = getSectionsPanel(action.payload.Door);
+      const { A1, A2, A3, B1, B2 } = getSectionsPanel(action.payload.Door);
       return {
         ...state,
         isLoading: false,
         doors: action.payload.Door,
         floorsA: A1,
         floorsB: B1,
+        A1,
+        A2,
+        A3,
+        B1,
+        B2,
       };
 
     case GET_ALL_DOORS_FAIL:

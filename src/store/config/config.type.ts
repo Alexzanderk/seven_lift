@@ -8,4 +8,10 @@ export interface ToggleDarkModeAction {
   type: typeof TOGGLE_DARK_MODE;
 }
 
-export type ConfigActionsTypes = ToggleRevertAction | ToggleDarkModeAction;
+export const SET_BACKGROUND = 'SET_BACKGROUND';
+export interface SetBackgroundAction {
+  type: typeof SET_BACKGROUND;
+  payload: { bg: string };
+}
+
+export type ConfigActionsTypes = ToggleRevertAction | ToggleDarkModeAction | SetBackgroundAction;

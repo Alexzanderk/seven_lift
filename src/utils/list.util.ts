@@ -5,7 +5,7 @@ export const getSectionsPanel = (arr: Door[]) => {
   const floorsWithTokenArr = arr.reduce<Array<Floor>>((acc: Array<Floor>, cur: Door) => {
     const splitedName = cur.Name.split(' '); //?
     const arrHouseAndLiftSection = splitedName[0].split('-');
-    const [floors, suffix] = splitedName[1].split('/');
+    const [floors] = splitedName[1].split('/');
     const floorsArr = floors.split('.');
 
     floorsArr.forEach((floorNum) => {
@@ -28,9 +28,9 @@ export const getSectionsPanel = (arr: Door[]) => {
 
   const A1 = filteredFloors.filter((item) => item.section === 'A1');
   const A2 = filteredFloors.filter((item) => item.section === 'A2');
-  const A3 = filteredFloors.filter((item) => item.section === 'A3');
+  const A3 = filteredFloors.filter((item) => item.section === 'A');
   const B1 = filteredFloors.filter((item) => item.section === 'B1');
-  const B2 = filteredFloors.filter((item) => item.section === 'B2');
+  const B2 = filteredFloors.filter((item) => item.section === 'B');
 
   return {
     A1,
@@ -49,4 +49,19 @@ export const changeFloorStatus = (token: number) => {
 
     return element;
   };
+};
+
+export const getLiftName = (section: 'A1' | 'A2' | 'A3' | 'B1' | 'B2'): string => {
+  switch (section) {
+    case 'A1':
+      return 'Пасажирський ліфт A1';
+    case 'A2':
+      return 'Пасажирський ліфт A2';
+    case 'A3':
+      return 'Вантажний ліфт A3';
+    case 'B1':
+      return 'Пасажирський ліфт B1';
+    case 'B2':
+      return 'Вантажний ліфт B2';
+  }
 };
