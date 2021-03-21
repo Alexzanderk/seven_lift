@@ -44,6 +44,7 @@ export const Options: FC = () => {
             control={<Switch checked={reverse} onChange={() => dispatch(toggleRevert())} name="checkedB" color="primary" />}
             label="Поміняти місяціми секції"
           />
+          
         </DialogContent>
       </Dialog>
     </div>

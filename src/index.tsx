@@ -39,15 +39,13 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <MuiThemeProvider theme={theme}>
-      <Provider store={store}>
-        <CssBaseline />
-        <GlobalStyle />
-        <App />
-      </Provider>
-    </MuiThemeProvider>
-  </React.StrictMode>,
+  <MuiThemeProvider theme={theme}>
+    <Provider store={store}>
+      <CssBaseline />
+      <GlobalStyle />
+      <App />
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root'),
 );
 
