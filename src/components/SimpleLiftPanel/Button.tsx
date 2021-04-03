@@ -1,5 +1,5 @@
 import { makeStyles, Theme, createStyles, Fab, Typography } from '@material-ui/core';
-import { lightGreen, blueGrey, deepOrange } from '@material-ui/core/colors';
+import { blueGrey } from '@material-ui/core/colors';
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OpenCloseDoorRequestBody } from '../../api/api.types';
@@ -16,23 +16,23 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     open: {
-      background: lightGreen['A400'],
-      border: `2px solid ${lightGreen['A400']}`,
-      color: blueGrey[700],
+      background: '#0d5804',
+      border: `2px solid #0C7500`,
+      color: '#9aa5aa',
       '&:hover': {
-        border: `2px solid ${lightGreen[900]}`,
-        background: lightGreen['A700'],
+        border: `2px solid #0C7500`,
+        background: '#0ea902',
       },
     },
     close: {
-      border: '2px solid red',
-      background: deepOrange['A400'],
-      color: '#fff',
+      border: '2px solid #8A000B',
+      background: '#5C0007',
+      color: '#e6e6e6',
       '&:hover': {
-        border: '2px solid red',
-        background: deepOrange['A400'],
-      },
-    },
+        border: '2px solid #5F0104',
+        background: '#750003',
+      }
+    }
   }),
 );
 

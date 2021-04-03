@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import { Typography } from '@material-ui/core';
-import { deepOrange, lightGreen, blueGrey } from '@material-ui/core/colors';
+import { blueGrey } from '@material-ui/core/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../core/root.reducer';
 import { openDoor, closeDoor } from '../../store/lift/lift.action';
@@ -17,21 +17,21 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     open: {
-      background: lightGreen['A400'],
-      border: `2px solid ${lightGreen['A400']}`,
+      background: '#084101',
+      border: `2px solid #0C7500`,
       color: blueGrey[700],
       '&:hover': {
-        border: `2px solid ${lightGreen[900]}`,
-        background: lightGreen['A700'],
+        border: `2px solid #0C7500`,
+        background: '#0b6201',
       },
     },
     close: {
-      border: '2px solid red',
-      background: deepOrange['A400'],
-      color: '#fff',
+      border: '2px solid #8A000B',
+      background: '#5C0007',
+      color: '#e6e6e6',
       '&:hover': {
-        border: '2px solid red',
-        background: deepOrange['A400'],
+        border: '2px solid #5F0104',
+        background: '#750003',
       },
     },
   }),
